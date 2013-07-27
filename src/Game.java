@@ -4,9 +4,19 @@ public class Game
 
     public static final char DRAW_CHAR = 'D';
 
+    /*
+    *   Unicode representation of CROSS_CHAR symbol
+    * */
+    public static final char CROSS_CHAR = '\u2718';
+
+    /*
+    *   Unicode representation of ZERO_CHAR symbol
+    * */
+    public static final char ZERO_CHAR = '\u25EF';
+
     protected static int  currentXPos = 0;
     protected static int  currentYPos = 0;
-    protected static char currentSign = 'X';
+    protected static char currentSign = CROSS_CHAR;
 
     protected Field field;
     private Player human = new Human();
@@ -62,9 +72,9 @@ public class Game
 
     public static void printGreetings()
     {
-        System.out.println("\n======================");
+        System.out.println("======================");
         System.out.println("======TIC-TAC-TOE=====");
-        System.out.println("======================\n");
+        System.out.println("======================");
     }
 
     public void nextMove(int moveIndex)
@@ -156,7 +166,7 @@ public class Game
 
     public boolean isEndOfGame()
     {
-        if (checkWhoWon() == 'X')
+        if (checkWhoWon() == CROSS_CHAR)
         {
             System.out.println("\n  -------------------");
             System.out.println("  --- PLAYER WON! ---");
@@ -164,7 +174,7 @@ public class Game
             return true;
         }
 
-        else if (checkWhoWon() == 'O')
+        else if (checkWhoWon() == ZERO_CHAR)
         {
             System.out.println("\n  ---------------------");
             System.out.println("  --- COMPUTER WON! ---");

@@ -4,6 +4,8 @@ public class Field
 
     public static final int FIELD_SIZE = 3;
 
+    public static int cellIndex = 1;
+
     protected static char[][] gameField;
 
     public Field()
@@ -21,7 +23,8 @@ public class Field
 
     public void drawGameField()
     {
-        System.out.println();
+        cellIndex = 1;
+        System.out.println("\n-------------");
 
         for (char[] row : gameField)
         {
@@ -30,7 +33,8 @@ public class Field
                 drawCell(column);
             }
 
-            System.out.println();
+            System.out.print("|");
+            System.out.println("\n-------------");
         }
 
         System.out.println();
@@ -38,6 +42,16 @@ public class Field
 
     public void drawCell(char cell)
     {
-        System.out.print("[" + cell + "]");
+        if (cell == DEFAULT_VALUE)
+        {
+            System.out.print("| " + cellIndex + " ");
+        }
+
+        else
+        {
+            System.out.print("| " + cell + " ");
+        }
+
+        cellIndex++;
     }
 }

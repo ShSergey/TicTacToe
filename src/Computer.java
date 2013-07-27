@@ -4,7 +4,7 @@ public class Computer extends Player
 
     public Computer()
     {
-        setPlayerSing('O');
+        setPlayerSing(Game.ZERO_CHAR);
         intellect = new AI();
     }
 
