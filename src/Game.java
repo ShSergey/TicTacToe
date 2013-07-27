@@ -4,9 +4,6 @@ public class Game
 
     public static final char DRAW_CHAR = 'D';
 
-    /*
-    *   Current values
-    */
     protected static int  currentXPos = 0;
     protected static int  currentYPos = 0;
     protected static char currentSign = 'X';

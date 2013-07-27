@@ -9,10 +9,12 @@ public class Human extends Player
         int rowIndex;
         int columnIndex;
 
+        char playerSing = getPlayerSing();
+
         while (true)
         {
             System.out.println("Your move, Player.");
-            System.out.print("Enter row index  [from 1 to 3] -> ");
+            System.out.print("Enter line index  [from 1 to 3] -> ");
 
             if (playerInput.hasNextInt())
             {
@@ -26,7 +28,7 @@ public class Human extends Player
                 continue;
             }
 
-            System.out.print("Enter cell index [from 1 to 3] -> ");
+            System.out.print("Enter column index [from 1 to 3] -> ");
 
             if (playerInput.hasNextInt())
             {
@@ -42,7 +44,7 @@ public class Human extends Player
 
             if (Game.isValidMove(rowIndex, columnIndex))
             {
-                Game.setNewSign(getPlayerSing(), rowIndex, columnIndex);
+                Game.setNewSign(playerSing, rowIndex, columnIndex);
                 break;
             }
 

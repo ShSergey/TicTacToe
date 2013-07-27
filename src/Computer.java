@@ -1,34 +1,48 @@
-import java.util.Random;
-
 public class Computer extends Player
 {
+    AI intellect;
+
     public Computer()
     {
         setPlayerSing('O');
+        intellect = new AI();
     }
 
     public void makeMove()
     {
-        int randColumnIndex;
-        int randRowIndex;
+        int columnIndex;
+        int rowIndex;
 
-        Random rand = new Random();
+        char humanSing = new Human().getPlayerSing();
+        char computerSing = getPlayerSing();
 
-        System.out.println("Computer's move");
-
-        // possible interval: (min,max)
-        int min = 0;
-        int max = 2;
-
-        do
+        if (intellect.canGenerateBestMove(computerSing))
         {
-            randColumnIndex = rand.nextInt(max - min + 1) + min;
-            randRowIndex = rand.nextInt(max - min + 1) + min;
+            rowIndex = intellect.getBestRowIndex();
+            columnIndex = intellect.getBestColumnIndex();
         }
-        while (!Game.isValidMove(randRowIndex, randColumnIndex));
 
-        // TODO: AI
+        else if (intellect.canGenerateBestMove(humanSing))
+        {
+            rowIndex = intellect.getBestRowIndex();
+            columnIndex = intellect.getBestColumnIndex();
+        }
 
-        Game.setNewSign(getPlayerSing(), randRowIndex, randColumnIndex);
+        else if (Game.haveFreeCellAt(1, 1))
+        {
+            rowIndex = 1;
+            columnIndex = 1;
+        }
+
+        else
+        {
+            intellect.generateRandomMove();
+            rowIndex = intellect.getBestRowIndex();
+            columnIndex = intellect.getBestColumnIndex();
+        }
+
+        Game.setNewSign(computerSing, rowIndex, columnIndex);
+
+        System.out.println("Computer played:");
     }
 }

@@ -1,8 +1,5 @@
 public class Field
 {
-    /*
-    *   Default value to initialize an array
-    */
     public static final char DEFAULT_VALUE = ' ';
 
     public static final int FIELD_SIZE = 3;
