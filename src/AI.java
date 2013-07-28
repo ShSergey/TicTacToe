@@ -3,11 +3,14 @@ import java.util.Random;
 public class AI
 {
     public static final int DEFAULT_INDEX = -1;
+
     private int bestRowIndex;
     private int bestColumnIndex;
 
-    private int currentRow = 0;
-    private int currentColumn = 0;
+    private int emptyRowIndex = 0;
+    private int emptyColumnIndex = 0;
+
+    /* how many 'X' or 'O' sings is in row/column/diagonal */
     private int singCounter = 0;
 
     public AI()
@@ -36,13 +39,13 @@ public class AI
 
     public boolean findInRows(char playerSing)
     {
-        currentColumn = 0;
+        emptyColumnIndex = 0;
         singCounter = 0;
 
         for (int i = 0; i < Field.FIELD_SIZE; i++)
         {
             singCounter = 0;
-            currentColumn = -1;
+            emptyColumnIndex = -1;
 
             for (int j = 0; j < Field.FIELD_SIZE; j++)
             {
@@ -53,14 +56,14 @@ public class AI
 
                 else if (Field.gameField[i][j] == Field.DEFAULT_VALUE)
                 {
-                    currentColumn = j;
+                    emptyColumnIndex = j;
                 }
             }
 
-            if (singCounter == 2 && currentColumn != -1)
+            if (singCounter == 2 && emptyColumnIndex != -1)
             {
                 bestRowIndex = i;
-                bestColumnIndex = currentColumn;
+                bestColumnIndex = emptyColumnIndex;
                 return true;
             }
         }
@@ -70,13 +73,13 @@ public class AI
 
     public boolean findInColumns(char playerSing)
     {
-        currentRow = 0;
+        emptyRowIndex = 0;
         singCounter = 0;
 
         for (int i = 0; i < Field.FIELD_SIZE; i++)
         {
             singCounter = 0;
-            currentRow = -1;
+            emptyRowIndex = -1;
 
             for (int j = 0; j < Field.FIELD_SIZE; j++)
             {
@@ -87,13 +90,13 @@ public class AI
 
                 else if (Field.gameField[j][i] == Field.DEFAULT_VALUE)
                 {
-                    currentRow = j;
+                    emptyRowIndex = j;
                 }
             }
 
-            if (singCounter == 2 && currentRow != -1)
+            if (singCounter == 2 && emptyRowIndex != -1)
             {
-                bestRowIndex = currentRow;
+                bestRowIndex = emptyRowIndex;
                 bestColumnIndex = i;
                 return true;
             }
@@ -105,8 +108,8 @@ public class AI
     public boolean findInDiagonal(char playerSing)
     {
         singCounter = 0;
-        currentRow = -1;
-        currentColumn = -1;
+        emptyRowIndex = -1;
+        emptyColumnIndex = -1;
 
         for (int i = 0; i < Field.FIELD_SIZE; i++)
         {
@@ -117,15 +120,15 @@ public class AI
 
             else if (Field.gameField[i][i] == Field.DEFAULT_VALUE)
             {
-                currentRow = i;
-                currentColumn = currentRow;
+                emptyRowIndex = i;
+                emptyColumnIndex = emptyRowIndex;
             }
         }
 
-        if (singCounter == 2 && currentRow != -1)
+        if (singCounter == 2 && emptyRowIndex != -1)
         {
-            bestRowIndex = currentRow;
-            bestColumnIndex = currentColumn;
+            bestRowIndex = emptyRowIndex;
+            bestColumnIndex = emptyColumnIndex;
             return true;
         }
 
@@ -135,8 +138,8 @@ public class AI
     public boolean findInAntiDiagonal(char playerSing)
     {
         singCounter = 0;
-        currentRow = -1;
-        currentColumn = -1;
+        emptyRowIndex = -1;
+        emptyColumnIndex = -1;
 
         for (int i = 0; i < Field.FIELD_SIZE; i++)
         {
@@ -147,15 +150,15 @@ public class AI
 
             else if (Field.gameField[i][2-i] == Field.DEFAULT_VALUE)
             {
-                currentRow = i;
-                currentColumn = 2 - i;
+                emptyRowIndex = i;
+                emptyColumnIndex = 2 - i;
             }
         }
 
-        if (singCounter == 2 && currentRow != -1 && currentColumn != -1)
+        if (singCounter == 2 && emptyRowIndex != -1 && emptyColumnIndex != -1)
         {
-            bestRowIndex = currentRow;
-            bestColumnIndex = currentColumn;
+            bestRowIndex = emptyRowIndex;
+            bestColumnIndex = emptyColumnIndex;
             return true;
         }
 
